@@ -5,7 +5,7 @@
 #include <string>
 using namespace std;
 
-// structure to store product details
+
 struct Product {
     string id;
     string name;
@@ -14,10 +14,8 @@ struct Product {
     double price;
 };
 
-// vector to store inventory data
 vector<Product> inventory;
 
-// function to load inventory data from file
 void loadFromFile() {
     ifstream file("inventory.dat");
     Product p;
@@ -28,7 +26,6 @@ void loadFromFile() {
     file.close();
 }
 
-// function to save inventory data to file
 void saveToFile() {
     ofstream file("inventory.dat");
     for (unsigned int i = 0; i < inventory.size(); i++) {
@@ -40,86 +37,85 @@ void saveToFile() {
     file.close();
 }
 
-// function to add a new product to the inventory
 void addProduct() {
     Product p;
     
-    cout << "=====add product=====\n";
-    cout << "enter product id: ";
+    cout << "=====ADD PRODUCT=====\n";
+    cout << "Enter Product ID: ";
     cin >> p.id;
     cin.ignore();
 
-    cout << "enter product name: ";
+    cout << "Enter Product Name: ";
     getline(cin, p.name);
 
-    cout << "enter category: ";
+    cout << "Enter Category: ";
     getline(cin, p.category);
 
-    cout << "enter quantity: ";
+    cout << "Enter Quantity: ";
     while (true) {
         cin >> p.quantity;
         
-        // validate input for quantity
+        //to ensure na whole numbers only
         if (cin.fail() || p.quantity < 0 || cin.peek() != '\n') {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "invalid input! whole numbers only.\nenter quantity: ";
+            cout << "INVALID INPUT! Whole numbers only.\nEnter Quantity: ";
         } else {
             break;
         }
     }
 
-    cout << "enter price: ";
+    cout << "Enter Price: ";
     while (true) {
         cin >> p.price;
 
-        // validate input for price
+        //only float or double are accepted 
         if (cin.fail() || p.price < 0 || cin.peek() != '\n') {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "invalid input! whole numbers or decimals only.\nenter price: ";
+            cout << "INVALID INPUT! Whole numbers or decimals only.\nEnter Price: ";
         } else {
             break;
         }
     }
-
-    // add product to inventory and save
+ 
+     //save to file
     inventory.push_back(p);
     saveToFile();
-    cout << "product added successfully.\n";
+    cout << "Product added successfully.\n";
 }
 
-// function to update stock for a product
+
 void updateStock() {
     string id;
     int change;
     char type;
 
-    cout << "=====update stock=====\n";
-    cout << "enter product id: ";
+    cout << "=====UPDATE STOCK=====\n";
+    cout << "Enter Product ID: ";
     cin >> id;
     bool found = false;
 
     for (unsigned int i = 0; i < inventory.size(); i++) {
         if (inventory[i].id == id) {
             found = true;
-            cout << "stock in (i) or stock out (o)? ";
+            cout << "Stock In (i) or Stock Out (o)? ";
             cin >> type;
-            cout << "enter quantity: ";
+            cout << "Enter quantity: ";
             cin >> change;
 
             if (type == 'i') {
                 inventory[i].quantity += change;
-                cout << "stock updated.\n";
+                cout << "Stock updated.\n";
             } else if (type == 'o') {
                 if (change > inventory[i].quantity) {
-                    cout << "not enough stock.\n";
+                    cout << "Not enough stock.\n";
                 } else {
                     inventory[i].quantity -= change;
-                    cout << "stock updated.\n";
+                    cout << "Stock updated.\n";
                 }
             } else {
-                cout << "invalid option.\n";
+                cout << "Invalid option.\n";
             }
 
             saveToFile();
@@ -127,53 +123,51 @@ void updateStock() {
         }
     }
 
-    if (!found) cout << "product not found.\n";
+    if (!found) cout << "Product not found.\n";
 }
 
-// function to search for a product by id or name
 void searchProduct() {
     int option;
 
-    cout << "=====search product=====\n";
-    cout << "search by (1. id) or (2. name): ";
+    cout << "=====SEARCH PRODUCT=====\n";
+    cout << "Search by (1. ID) or (2. Name): ";
     cin >> option;
     cin.ignore();
     bool found = false;
 
     if (option == 1) {
         string id;
-        cout << "enter product id: ";
+        cout << "Enter Product ID: ";
         cin >> id;
         for (unsigned int i = 0; i < inventory.size(); i++) {
             if (inventory[i].id == id) {
-                cout << "found: " << inventory[i].name << " (" << inventory[i].category << "), quantity: " << inventory[i].quantity << ", price: $" << inventory[i].price << endl;
+                cout << "Found: " << inventory[i].name << " (" << inventory[i].category << "), Quantity: " << inventory[i].quantity << ", Price: $" << inventory[i].price << endl;
                 found = true;
                 break;
             }
         }
     } if (option == 2) {
         string name;
-        cout << "enter product name: ";
+        cout << "Enter Product Name: ";
         getline(cin, name);
         for (unsigned int i = 0; i < inventory.size(); i++) {
             if (inventory[i].name == name) {
-                cout << "found: " << inventory[i].id << " (" << inventory[i].category << "), quantity: " << inventory[i].quantity << ", price: $" << inventory[i].price << endl;
+                cout << "Found: " << inventory[i].id << " (" << inventory[i].category << "), Quantity: " << inventory[i].quantity << ", Price: $" << inventory[i].price << endl;
                 found = true;
                 break;
             }
         }
     } else {
-        cout << "invalid input!";
+        cout << "Invalid Input!";
         return;
     }
 
-    if (!found) cout << "product not found.\n";
+    if (!found) cout << "Product not found.\n";
 }
 
-// function to display all products in inventory
 void displayAll() {
-    cout << setw(10) << "id" << setw(20) << "name" << setw(15) << "category"
-         << setw(10) << "qty" << setw(10) << "price" << endl;
+    cout << setw(10) << "ID" << setw(20) << "Name" << setw(15) << "Category"
+         << setw(10) << "Qty" << setw(10) << "Price" << endl;
     cout << string(65, '-') << endl;
     for (unsigned int i = 0; i < inventory.size(); i++) {
         cout << setw(10) << inventory[i].id << setw(20) << inventory[i].name << setw(15) << inventory[i].category
@@ -181,19 +175,17 @@ void displayAll() {
     }
 }
 
-// function to calculate total inventory value
 void calculateInventoryValue() {
     double total = 0;
     for (unsigned int i = 0; i < inventory.size(); i++) {
         total += inventory[i].quantity * inventory[i].price;
     }
-    cout << "total inventory value: " << fixed << setprecision(2) << total << " pesos" << endl;
+    cout << "Total Inventory Value: " << fixed << setprecision(2) << total << " pesos" << endl;
 }
 
-// function to delete a product from inventory
 void deleteProduct() {
     string id;
-    cout << "enter product id to delete: ";
+    cout << "Enter Product ID to delete: ";
     cin >> id;
     bool found = false;
 
@@ -201,16 +193,15 @@ void deleteProduct() {
         if (it->id == id) {
             inventory.erase(it);
             saveToFile();
-            cout << "product deleted.\n";
+            cout << "Product deleted.\n";
             found = true;
             break;
         }
     }
 
-    if (!found) cout << "product not found.\n";
+    if (!found) cout << "Product not found.\n";
 }
 
-// function to validate user input for main menu
 bool isValidChoice(const string& input, int& choice) {
     // check if input is only 1 to 7
     if (input.length() == 1 && isdigit(input[0])) {
@@ -220,27 +211,26 @@ bool isValidChoice(const string& input, int& choice) {
     return false;
 }
 
-// main function to run the inventory system
 int main() {
     loadFromFile();
     int choice;
     string input;
 
     do {
-        cout << "\n======= inventory of items ========\n";
-        cout << "1. add new product\n";
-        cout << "2. update stock\n";
-        cout << "3. search product\n";
-        cout << "4. display all products\n";
-        cout << "5. calculate inventory value\n";
-        cout << "6. delete product\n";
-        cout << "7. exit\n";
-        cout << "\nselect an option (1 to 7): ";
+        cout << "\n======= INVENTORY OF ITEMS ========\n";
+        cout << "1. Add New Product\n";
+        cout << "2. Update Stock\n";
+        cout << "3. Search Product\n";
+        cout << "4. Display All Products\n";
+        cout << "5. Calculate Inventory Value\n";
+        cout << "6. Delete Product\n";
+        cout << "7. Exit\n";
+        cout << "\nSelect an Option (1 to 7): ";
         
         getline(cin, input);
 
         if (!isValidChoice(input, choice)) {
-            cout << "invalid input! enter a whole number between 1 and 7 only.\n";
+            cout << "INVALID INPUT! Enter a whole number between 1 and 7 only.\n";
             continue;
         }        
 
@@ -251,7 +241,7 @@ int main() {
             case 4: displayAll(); break;
             case 5: calculateInventoryValue(); break;
             case 6: deleteProduct(); break;
-            case 7: cout << "exiting system.\n"; break;
+            case 7: cout << "Exiting system.\n"; break;
         }
 
     } while (choice != 7);
