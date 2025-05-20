@@ -87,6 +87,8 @@ void updateStock() {
     string id;
     int change;
     char type;
+
+    cout << "=====UPDATE STOCK=====\n";
     cout << "Enter Product ID: ";
     cin >> id;
     bool found = false;
@@ -123,6 +125,8 @@ void updateStock() {
 
 void searchProduct() {
     int option;
+
+    cout << "=====SEARCH PRODUCT=====\n";
     cout << "Search by (1. ID) or (2. Name): ";
     cin >> option;
     cin.ignore();
