@@ -59,7 +59,7 @@ void addProduct() {
         if (cin.fail() || p.quantity < 0 || cin.peek() != '\n') {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "INVALID INPUT! Whole numbers only.\nEnter Quantity: ";
+            cout << "INVALID INPUT! Enter a valid Quantity.\nEnter Quantity: ";
         } else {
             break;
         }
@@ -73,7 +73,7 @@ void addProduct() {
         if (cin.fail() || p.price < 0 || cin.peek() != '\n') {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "INVALID INPUT! Whole numbers or decimals only.\nEnter Price: ";
+            cout << "INVALID INPUT! Enter a valid price.\nEnter Price: ";
         } else {
             break;
         }
@@ -230,8 +230,8 @@ int main() {
         getline(cin, input);
 
         if (!isValidChoice(input, choice)) {
-            cout << "INVALID INPUT! Enter a whole number between 1 and 7 only.\n";
-            continue;
+            cout << "Invalid Input!\n";
+        continue;
         }        
 
         switch (choice) {
@@ -243,6 +243,7 @@ int main() {
             case 6: deleteProduct(); break;
             case 7: cout << "Exiting system.\n"; break;
         }
+        
 
     } while (choice != 7);
 
