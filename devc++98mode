@@ -5,13 +5,6 @@
 #include <string>
 using namespace std;
 
-/* LIST TO DO
-1. Finalize addProduct()
-- input Quantity (whole numbers only)
-- input Price (whole numbers & decimals only)
-2. Finalize main()
-- after mag run dapat 1-7 ra iyang dawaton 
-*/
 
 struct Product {
     string id;
