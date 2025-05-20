@@ -45,7 +45,7 @@ void addProduct() {
     cin >> p.id;
     cin.ignore();
     
-    for (const auto& item : inventory) {
+    for (const auto& item : inventory) { //check if the ID already exist
         if (item.id == p.id) {
             cout << "ERROR: Product ID already exists. Product not added.\n";
             return;
@@ -103,7 +103,7 @@ void updateStock() {
     cin >> id;
     bool found = false;
 
-    for (unsigned int i = 0; i < inventory.size(); i++) {
+    for (unsigned int i = 0; i < inventory.size(); i++) { 
         if (inventory[i].id == id) {
             found = true;
             cout << "Stock In (i) or Stock Out (o)? ";
@@ -146,7 +146,7 @@ void searchProduct() {
         string id;
         cout << "Enter Product ID: ";
         cin >> id;
-        for (unsigned int i = 0; i < inventory.size(); i++) {
+        for (unsigned int i = 0; i < inventory.size(); i++) { //loop that checks/find the similar ID
             if (inventory[i].id == id) {
                 cout << "Found: " << inventory[i].name << " (" << inventory[i].category
                      << "), Quantity: " << inventory[i].quantity
@@ -159,7 +159,7 @@ void searchProduct() {
         string name;
         cout << "Enter Product Name: ";
         getline(cin, name);
-        for (unsigned int i = 0; i < inventory.size(); i++) {
+        for (unsigned int i = 0; i < inventory.size(); i++) { //loop that checks/find the similar ID
             if (inventory[i].name == name) {
                 cout << "Found: " << inventory[i].id << " (" << inventory[i].category
                      << "), Quantity: " << inventory[i].quantity
@@ -189,7 +189,7 @@ void displayAll() {
     }
 }
 
-void calculateInventoryValue() {
+void calculateInventoryValue() { //calculates the inventory value
     double total = 0;
     for (unsigned int i = 0; i < inventory.size(); i++) {
         total += inventory[i].quantity * inventory[i].price;
