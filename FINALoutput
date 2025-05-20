@@ -226,11 +226,10 @@ int main() {
         cout << "6. Delete Product\n";
         cout << "7. Exit\n";
         cout << "\nSelect an Option (1 to 7): ";
-        
-        getline(cin, input);
+        cin >> input;
 
         if (!isValidChoice(input, choice)) {
-            cout << "Invalid Input!\n";
+            //cout << "Invalid Input!\n";
         continue;
         }        
 
