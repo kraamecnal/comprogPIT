@@ -45,12 +45,12 @@ void addProduct() {
     cin >> p.id;
     cin.ignore();
     
-    for (const auto& item : inventory) { //check if the ID already exist
-        if (item.id == p.id) {
-            cout << "ERROR: Product ID already exists. Product not added.\n";
-            return;
-        }
-    }   
+    for (const auto& item : inventory) { //check if the ID already exist
+        if (item.id == p.id) {
+            cout << "ERROR: Product ID already exists. Product not added.\n";
+            return;
+        }
+    }   
 
     cout << "Enter Product Name: ";
     getline(cin, p.name);
@@ -134,48 +134,48 @@ void updateStock() {
 }
 
 void searchProduct() {
-    int option;
+    int option;
 
-    cout << "=====SEARCH PRODUCT=====\n";
-    cout << "Search by (1. ID) or (2. Name): ";
-    cin >> option;
-    cin.ignore();  // clear newline from input buffer
-    bool found = false;
+    cout << "=====SEARCH PRODUCT=====\n";
+    cout << "Search by (1. ID) or (2. Name): ";
+    cin >> option;
+    cin.ignore(); // clear newline from input buffer
+    bool found = false;
 
-    if (option == 1) {
-        string id;
-        cout << "Enter Product ID: ";
-        cin >> id;
-        for (unsigned int i = 0; i < inventory.size(); i++) { //loop that checks/find the similar ID
-            if (inventory[i].id == id) {
-                cout << "Found: " << inventory[i].name << " (" << inventory[i].category
-                     << "), Quantity: " << inventory[i].quantity
-                     << ", Price: " << fixed << setprecision(2) << inventory[i].price << "pesos" << endl;
-                found = true;
-                break;
-            }
-        }
-    } else if (option == 2) {
-        string name;
-        cout << "Enter Product Name: ";
-        getline(cin, name);
-        for (unsigned int i = 0; i < inventory.size(); i++) { //loop that checks/find the similar ID
-            if (inventory[i].name == name) {
-                cout << "Found: " << inventory[i].id << " (" << inventory[i].category
-                     << "), Quantity: " << inventory[i].quantity
-                     << ", Price: " << fixed << setprecision(2) << inventory[i].price << "pesos" << endl;
-                found = true;
-                break;
-            }
-        }
-    } else {
-        cout << "Invalid Input!\n";
-        return;
-    }
+    if (option == 1) {
+        string id;
+        cout << "Enter Product ID: ";
+        cin >> id;
+        for (unsigned int i = 0; i < inventory.size(); i++) { //loop that checks/find the similar ID
+            if (inventory[i].id == id) {
+                cout << "Found: " << inventory[i].name << " (" << inventory[i].category
+                    << "), Quantity: " << inventory[i].quantity
+                        << ", Price: " << fixed << setprecision(2) << inventory[i].price << "pesos" << endl;
+                found = true;
+                break;
+            }
+        }
+    } else if (option == 2) {
+        string name;
+        cout << "Enter Product Name: ";
+        getline(cin, name);
+        for (unsigned int i = 0; i < inventory.size(); i++) { //loop that checks/find the similar ID
+            if (inventory[i].name == name) {
+                cout << "Found: " << inventory[i].id << " (" << inventory[i].category
+                    << "), Quantity: " << inventory[i].quantity
+                    << ", Price: " << fixed << setprecision(2) << inventory[i].price << "pesos" << endl;
+                found = true;
+                break;
+            }
+        }
+    } else {
+        cout << "Invalid Input!\n";
+        return;
+    }
 
-    if (!found) {
-        cout << "Product not found.\n";
-    }
+    if (!found) {
+        cout << "Product not found.\n";
+    }
 }
 
 
